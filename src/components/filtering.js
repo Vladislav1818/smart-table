@@ -11,9 +11,19 @@ export function initFiltering(elements) {
     }
 
     const applyFiltering = (query, state, action) => {
-        // код с обработкой очистки поля
-         
+         if (action && action.name === 'clear') {
+  const field = action.dataset.field;
+  const input =
+    wrapper?.querySelector(`[name="${field}"]`) ||
+    wrapper?.querySelector('input, select, textarea');
 
+  if (input) {
+    input.value = '';
+    state[input.name] = '';
+  }
+
+  if (field) state[field] = '';
+}
         // @todo: #4.5 — отфильтровать данные, используя компаратор
         const filter = {};
         Object.keys(elements).forEach(key => {
